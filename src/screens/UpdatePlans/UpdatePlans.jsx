@@ -1,11 +1,11 @@
 import { View, Text } from "react-native"
 
-const UpdatePlains = () => {
+const UpdatePlans = () => {
     return (
         <View>
-            <Text>Hello desde UpdatePlains</Text>
+            <Text>Hello desde UpdatePlans</Text>
         </View>
     )
 }
 
-export default UpdatePlains
+export default UpdatePlans

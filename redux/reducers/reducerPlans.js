@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  plans: {},
+  plans: [],
   plan: {},
   exercises: [],
+  days: [],
 };
 
 export const planSlice = createSlice({
@@ -14,17 +15,19 @@ export const planSlice = createSlice({
       state.plan = { ...state.plan, name: action.payload };
     },
     actionSetDayPlan: (state, action) => {
-      state.plan = { ...state.plan, days: action.payload};
-      console.log(state.plan);
+      state.days = [...state.days, action.payload];
     },
     actionSetExercises: (state, action) => {
       state.exercises = [...state.exercises, action.payload];
+    },
+    actionSetPlan: (state, action) => {
+      state.plans = [...state.plans, action.payload];
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { actionSetNamePlan, actionSetExercises, actionSetDayPlan } =
+export const { actionSetNamePlan, actionSetExercises, actionSetDayPlan,actionSetPlan } =
   planSlice.actions;
 
 export default planSlice.reducer;

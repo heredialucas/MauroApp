@@ -12,17 +12,16 @@ const CreateContainDays = ({ route, navigation }) => {
 
   const onSetExercise = (exercise) => {
     selectedExercises.push(exercise);
-    console.log(selectedExercises);
   };
 
   const onCreateDay = () => {
-    console.log("FUNCIONA");
     dispatch(
       actionSetDayPlan({
         day: day,
         exercises: selectedExercises,
       })
     );
+    navigation.navigate("Contenido Plan");
   };
 
   return (
