@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet ,TouchableNativeFeedback} from "react-native";
+import { View, Text, TextInput, StyleSheet ,TouchableNativeFeedback, Alert} from "react-native";
 import { actionSetExercises } from "../../../redux/reducers/reducerPlans";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -8,11 +8,14 @@ const CreateExercise = ({ navigation }) => {
   const [name, setName] = useState("");
   const [series, setSeries] = useState("");
   const [reps, setReps] = useState("");
+  const [weightMin, setWeightMin] = useState("");
+  const [weightMax, setWeightMax] = useState("");
 
   const [exercise, setExercise] = useState({
     name: "",
     series: "",
     repetitions: "",
+    weight: "",
   });
 
   useEffect(() => {
@@ -20,15 +23,23 @@ const CreateExercise = ({ navigation }) => {
       name: name,
       series: series,
       repetitions: reps,
+      weightMin: weightMin,
+      weightMax: weightMax,
     });
-  }, [name, series, reps]);
+  }, [name, series, reps, weightMin, weightMax]);
 
   function onCreateExercise() {
-    dispatch(actionSetExercises(exercise));
-    setName('');
-    setSeries('');
-    setReps('');
-    navigation.navigate("Ejercicios");
+    if(name === "" || series === "" || reps === "" || weightMin === "" || weightMax === ""){
+      Alert.alert("Error", "Todos los campos son obligatorios");
+    }else{
+      dispatch(actionSetExercises(exercise));
+      setName('');
+      setSeries('');
+      setReps('');
+      setWeightMin('');
+      setWeightMax('');
+      navigation.navigate("Ejercicios");
+    }
   }
 
   return (
@@ -39,6 +50,7 @@ const CreateExercise = ({ navigation }) => {
         value={name}
         onChangeText={(value) => setName(value)}
         style={style.input}
+        required
       />
       <Text style={style.label}>Series</Text>
       <TextInput
@@ -54,6 +66,22 @@ const CreateExercise = ({ navigation }) => {
         keyboardType="numeric"
         value={reps}
         onChangeText={(value) => setReps(value)}
+        style={style.input}
+      />
+      <Text style={style.label}>Peso Minimo</Text>
+      <TextInput
+        name="weightMin"
+        keyboardType="numeric"
+        value={weightMin}
+        onChangeText={(value) => setWeightMin(value)}
+        style={style.input}
+      />
+      <Text style={style.label}>Peso Maximo</Text>
+      <TextInput
+        name="weightMax"
+        keyboardType="numeric"
+        value={weightMax}
+        onChangeText={(value) => setWeightMax(value)}
         style={style.input}
       />
       <TouchableNativeFeedback>

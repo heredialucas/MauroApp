@@ -6,11 +6,12 @@ const ViewExercises = () => {
 
   return (
     <>
-      {Exercises?.map((exercise,index) => (
+      {Exercises?.map((exercise, index) => (
         <View key={index}>
-          <Text>{exercise.name}</Text>
-          <Text>{exercise.series}</Text>
-          <Text>{exercise.repetitions}</Text>
+          <Text>Nombre: {exercise.name}</Text>
+          <Text>Series: {exercise.series}</Text>
+          <Text>Repeticiones: {exercise.repetitions}</Text>
+          <Text>Peso: {`${exercise.weightMin} - ${exercise.weightMax}`}</Text>
           <Text></Text>
         </View>
       ))}
